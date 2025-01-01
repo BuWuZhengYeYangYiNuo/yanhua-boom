@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>烟花效果</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="fireworksCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('fireworksCanvas');
+        const context = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Firework {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.particles = [];
+                for (let i = 0; i < 100; i++) {
+                    const angle = Math.random() * 2 * Math.PI;
+                    const speed = Math.random() * 5;
+                    this.particles.push({
+                        x: x,
+                        y: y,
+                        vx: speed * Math.cos(angle),
+                        vy: speed * Math.sin(angle),
+                        color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+                        alpha: 1
+                    });
+                }
+            }
+
+            update() {
+                this.particles。forEach(p => {this.particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.1; // 重力效果
+                    p.alpha -= 0.01; // 颜色渐变
+                });
+                this.particles = this.particles.filter(p => p.alpha > 0);
+            }
+
+            draw() {
+                this.particles.forEach(p => {
+                    context.globalAlpha = p.alpha;
+                    context.fillStyle = p.color;
+                    context.beginPath();
+                    context.arc(p.x, p.y, 2, 0, 2 * Math.PI);
+                    context.fill();
+                });
+            }
+        }
+
+           Const fireworks = []；const fireworks = [];
+
+        canvas.addEventListener('click', (event) => {
+            const x = event.clientX;
+            const y = event.clientY;
+            fireworks.push(new Firework(x, y));
+        });
+
+        function animate() {
+            context.globalAlpha = 0.1;
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.globalAlpha = 1;
+
+            fireworks.forEach(firework => {
+                firework.update();
+                firework.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
