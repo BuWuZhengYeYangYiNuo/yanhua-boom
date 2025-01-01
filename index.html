@@ -3,62 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>诺诺出品，必属精品</title>
+    <title>诺诺出品</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;   背景颜色:黑色;
+            background-color: black;
         }
-        canvas {   帆布{
-            display: block;   显示:块;
+        canvas {
+            display: block;
         }
-    </style>   > < /风格
-</head>   > < /头
-<body>   身体< >
-    <canvas id="fireworksCanvas"></canvas><帆布id = " fireworksCanvas " > < /帆布>
-    <script>   < >脚本
-        const canvas = document.getElementById('fireworksCanvas');const canvas = document.getElementById('fireworksCanvas')；
-        const context = canvas.getContext('2d');const context = canvas.getContext('2d')；
+    </style>
+</head>
+<body>
+    <canvas id="fireworksCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('fireworksCanvas');
+        const context = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        class Firework {   类Firework {
-            constructor(x, y) {   构造函数（x, y） {
-                this.x = x;   这一点。X = X；
-                this.y = y;   这一点。Y = Y；
+        class Firework {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
                 this.particles = [];
-                for (let i = 0; i < 100; i++) {对于(令I = 0；I < 100；I) {
-                    const angle = Math.random() * 2 * Math.PI;const   常量 angle = Math.random   随机() * 2 * Math.PI；
-                    const speed = Math.random() * 5;const   常量 speed = Math.random   随机() * 5；
+                for (let i = 0; i < 100; i++) {
+                    const angle = Math.random() * 2 * Math.PI;
+                    const speed = Math.random() * 5;
                     this.particles.push({
                         x: x,
                         y: y,
-                        vx: speed * Math.cos(angle),vx：速度* Math.cos（角度）
-                        vy: speed * Math.sin(angle),* Math.sin（角度）；
-                        color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,颜色:“rgb ($ {math . random   随机 () * 255}, {math . random () * 255}, {math . random() * 255})美元的,
-                        alpha: 1   α:1
+                        vx: speed * Math.cos(angle),
+                        vy: speed * Math.sin(angle),
+                        color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+                        alpha: 1
                     });
                 }
             }
 
             update() {
-                this.particles.forEach(p => {this   这.particles。forEach   粒子。forEach(p => {
-                    p.x += p.vx;   P.x = p.vx；
-                    p.y += p.vy;   P.y = P.y；
+                this.particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
                     p.vy += 0.1; // 重力效果
                     p.alpha -= 0.01; // 颜色渐变
                 });
-                this.particles = this.particles.filter(p => p.alpha > 0);这一点。粒子=这个粒子。Filter (p => p.alpha   α > 0)；
+                this.particles = this.particles.filter(p => p.alpha > 0);
             }
 
-            draw() {   画(){
-                this.particles.forEach(p => {this   这.particles。forEach   粒子。forEach(p => {
+            draw() {
+                this.particles.forEach(p => {
                     context.globalAlpha = p.alpha;
                     context.fillStyle = p.color;
                     context.beginPath();
-                    context.arc(p.x, p.y, 2, 0, 2 * Math.PI);context.arc (p。x, py, 2,0, 2 * Math.PI)；
+                    context.arc(p.x, p.y, 2, 0, 2 * Math.PI);
                     context.fill();
                 });
             }
