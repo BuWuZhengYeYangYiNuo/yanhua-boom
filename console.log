@@ -1,0 +1,6 @@
+canvas.addEventListener('click', (event) => {
+    const x = event.clientX;
+    const y = event.clientY;
+    console.log(`Clicked at (${x}, ${y})`);
+    fireworks.push(new Firework(x, y));
+});
